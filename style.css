@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+nav {
+    /* ナビゲーションスタイリング */
+}
+
+#properties {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+aside {
+    /* サイドバーのスタイル */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
