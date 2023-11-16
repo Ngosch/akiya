@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 <head>
     <meta charset="UTF-8">
     <title>空き家バンク情報</title>
@@ -9,7 +11,8 @@
     <div id="mobara-property">
         <!-- ここにPDFリンクが表示されます -->
     </div>
-    <script src="/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 
 </body>
 </html>

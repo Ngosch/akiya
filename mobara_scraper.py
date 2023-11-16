@@ -1,15 +1,15 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, render_template, send_from_directory
 import requests
 from bs4 import BeautifulSoup
 from flask_cors import CORS  # CORSをインポート
-
 
 app = Flask(__name__)
 CORS(app)  # CORSの設定を追加
 
 @app.route('/')
 def index():
-    return "Welcome to the Mobara Scraper API!"
+    # "index.html" テンプレートをレンダリングします
+    return render_template('index.html')
 
 @app.route('/get_mobara_pdf')
 def get_mobara_pdf():
@@ -26,6 +26,7 @@ def get_mobara_pdf():
 
 @app.route('/js/<path:filename>')
 def custom_static_for_js(filename):
+    # JavaScriptファイルを提供するためのカスタムルート
     return send_from_directory('js', filename)
 
 if __name__ == '__main__':
