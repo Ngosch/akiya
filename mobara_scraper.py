@@ -18,23 +18,27 @@ def get_mobara_pdf():
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        # 2つの物件のリンクを取得
-        first_property_link = soup.select_one('#mol_contents > div.mol_attachfileblock.block_index_4 > ul > li:nth-child(1) > a')['href']
-        second_property_link = soup.select_one('#mol_contents > div.mol_attachfileblock.block_index_4 > ul > li:nth-child(2) > a')['href']
+        # 最初の物件
+        first_property = soup.select_one('#mol_contents > div.mol_attachfileblock.block_index_4 > ul > li:nth-child(1) > a')
+        first_property_link = 'https://www.city.mobara.chiba.jp' + first_property['href'].replace('./', '/')
+        first_property_title = '茂原市 ' + first_property.get_text()
 
-        # 絶対URLに変換
-        base_url = 'https://www.city.mobara.chiba.jp'
-        first_property_link = base_url + first_property_link.replace('./', '/')
-        second_property_link = base_url + second_property_link.replace('./', '/')
+        # 2番目の物件
+        second_property = soup.select_one('#mol_contents > div.mol_attachfileblock.block_index_4 > ul > li:nth-child(2) > a')
+        second_property_link = 'https://www.city.mobara.chiba.jp' + second_property['href'].replace('./', '/')
+        second_property_title = '茂原市 ' + second_property.get_text()
 
-        # JSONレスポンスに2つのリンクを含める
         return jsonify({
             'firstPropertyLink': first_property_link,
-            'secondPropertyLink': second_property_link
+            'firstPropertyTitle': first_property_title,
+            'secondPropertyLink': second_property_link,
+            'secondPropertyTitle': second_property_title
         })
     except Exception as e:
         print(f"エラーが発生しました: {e}")
         return jsonify({'error': str(e)})
+
+
 
 
 @app.route('/js/<path:filename>')
